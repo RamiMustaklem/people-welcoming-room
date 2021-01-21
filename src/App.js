@@ -10,8 +10,16 @@ function App() {
   const [enteredNamesArray, setEnteredNamesArray] = useState([]);
 
   const intervalRef = useRef(null);
+  const lastNameRef = useRef('');
 
   const removePersonNameFromRoom = (index) => {
+    /**
+     * Edge case workaround
+     * if you enter the room and your name gets displayed and leave before 3 seconds
+     */
+    if (displayName === enteredNamesArray[0]) {
+      return;
+    }
     // filter out the item we do not need and return new array
     setEnteredNamesArray(arr => arr.filter((_, i) => i !== index));
   };
@@ -67,9 +75,11 @@ function App() {
               setDisplayName('');
               clearInterval(intervalRef.current);
               intervalRef.current = null;
+              return newArr;
             }
 
             setDisplayName(newArr[0]);
+            lastNameRef.current = newArr[0];
             return newArr;
           });
         }, 3000);
