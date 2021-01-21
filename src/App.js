@@ -17,7 +17,7 @@ function App() {
      * Edge case workaround
      * if you enter the room and your name gets displayed and leave before 3 seconds
      */
-    if (displayName === enteredNamesArray[0]) {
+    if (displayName === enteredNamesArray[index]) {
       return;
     }
     // filter out the item we do not need and return new array
