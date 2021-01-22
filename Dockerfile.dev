@@ -1,0 +1,17 @@
+# pull official base image
+FROM node:14.15.4-alpine3.10
+
+# set working directory
+WORKDIR /app
+
+# copy package.json to working directory
+COPY package.json /app
+
+# install app dependencies
+RUN yarn
+
+# add app
+COPY . /app
+
+# start app
+CMD ["yarn", "start"]
